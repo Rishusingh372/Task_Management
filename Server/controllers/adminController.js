@@ -40,13 +40,13 @@ const createUser = async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'pandeyadarsh9628@gmail.com',
-                pass: 'gfxu veqd gyif bnwm'
+                user: 'rishu272018@gmail.com',
+                pass: 'uqlp otnl vjjo hcfj'
             }
         });
 
         const mailOptions = {
-            from: 'pandeyadarsh9628@gmail.com',
+            from: 'rishu272018@gmail.com',
             to: email,
             subject: "Employee Task Management Password",
             text: `Welcome ${name}! \n Your Task Management Password is : ${userPassword}`
