@@ -13,8 +13,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/admin", adminRouter);
 
 
-
-
 mongoose.connect(process.env.MONGODB_URL).then(()=>{
     console.log("Connected to MongoDB");
 }).catch((err)=>{

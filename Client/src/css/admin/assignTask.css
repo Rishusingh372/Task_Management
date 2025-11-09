@@ -87,7 +87,7 @@
 }
 
 .modal-content {
-  background: white;
+  background: rgb(255, 255, 255);
   padding: 30px;
   border-radius: 14px;
   width: 450px;
@@ -130,8 +130,8 @@
 }
 
 .save-btn {
-  background-color: #2563eb;
-  color: white;
+  background-color: #fcfcfc;
+  color: rgb(0, 0, 0);
   border: none;
   padding: 10px 18px;
   border-radius: 8px;

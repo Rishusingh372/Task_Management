@@ -7,7 +7,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #4f46e5, #3b82f6);
+  background: linear-gradient(135deg, #344489, #ffffff);
   animation: bgMove 8s infinite alternate ease-in-out;
 }
 
@@ -44,7 +44,7 @@ body {
   text-align: center;
   margin-bottom: 22px;
   font-size: 24px;
-  color: #fff;
+  color: #000000;
   letter-spacing: 1px;
   animation: fadeIn 1s ease;
 }
