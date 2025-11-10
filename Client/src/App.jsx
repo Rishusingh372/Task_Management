@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
@@ -7,6 +6,8 @@ import Layout from "../Layout"
 import AdminDashboard from "./admin/AdminDashboard"
 import CreateUser from "./admin/CreateUser"
 import AssignTask from "./admin/AssignTask"
+import Empdashboard from "./employee/empDashboard"
+import Showtask from "./employee/Showtask"
 function App() {
 
 
@@ -17,9 +18,21 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
         </Route>
+      </Routes>
+
+        <Routes>
         <Route path="admindashboard" element={<AdminDashboard />}>
           <Route path="createUser" element={<CreateUser/>} />
           <Route path="assignTask" element={<AssignTask/>} />
+        </Route>
+        </Routes>
+
+
+       <Routes>
+        <Route path="/empdashboard/:id" element={<Empdashboard/>}>
+        <Route index element={<Showtask/>} />
+        <Route path="showtask" element={<Showtask/>} />
+          
         </Route>
        </Routes>
       </BrowserRouter>
@@ -27,4 +40,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
