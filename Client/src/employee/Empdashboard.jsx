@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-// import "../css/employee/empDashboard.css";
+import "../css/employee/empDashboard.css";
 
 const Empdashboard = () => {
   const [isOpen, setIsOpen] = useState(true);

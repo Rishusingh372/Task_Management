@@ -101,7 +101,7 @@ const Showtask = () => {
         </table>
       </div>
 
-      {/* Modal Section */}
+      {/* Modal Section
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -142,7 +142,7 @@ const Showtask = () => {
             </form>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
