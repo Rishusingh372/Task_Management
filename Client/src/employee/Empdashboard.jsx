@@ -32,10 +32,10 @@ const Empdashboard = () => {
             <i className="fa-solid fa-hourglass-half"></i>
             <span>Pending Tasks</span>
           </Link>
-          <Link to="profile">
+          {/* <Link to="profile">
             <i className="fa-solid fa-user"></i>
             <span>Profile</span>
-          </Link>
+          </Link> */}
         </nav>
       </aside>
 
