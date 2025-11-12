@@ -20,7 +20,7 @@ const AdminDashboard = () => {
         <nav className="sidebar-links">
           <Link to="createUser">Create User</Link>
           <Link to="assignTask">Assign Task</Link>
-          <Link to="viewTasks">View Tasks</Link>
+          <Link to="viewTasks">View Report</Link>
           <Link to="viewUsers">View Users</Link>
           <Link to="updateTaskStatus">Update Task Status</Link>
         </nav>
