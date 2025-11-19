@@ -1,4 +1,4 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../css/employee/showTask.css";
@@ -8,57 +8,86 @@ const Showtask = () => {
   const { id } = useParams();
   const [tasks, setTasks] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedTask , setSelectedTask]  = useState(null)
+  const [selectedTask, setSelectedTask] = useState(null);
   const [tid, setTid] = useState("");
-  const [input , setInput] = useState({});
-
-
+  const [input, setInput] = useState({
+    status: "",
+    completionday: "",
+    comment: ""
+  });
 
   const fetchTasks = async () => {
     try {
       const api = `${import.meta.env.VITE_BACKEND_URL}/employee/showtask/${id}`;
       const response = await axios.get(api);
+      console.log("Fetched tasks:", response.data);
       setTasks(response.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
+      toast.error("Failed to load tasks");
     }
   };
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [id]);
 
   // Open report modal
   const handleReportClick = (task) => {
-    setSelectedTask(task)
+    setSelectedTask(task);
     setTid(task._id);
+    setInput({
+      status: task.status || "",
+      completionday: task.completionday || "",
+      comment: task.comment || ""
+    });
     setShowModal(true);
   };
 
+  const handlchange = (e) => {
+    const { name, value } = e.target;
+    setInput((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
-
-  const handlchange =(e)=>{
-       const { name , value} = e.target 
-       setInput((prev)=>({
-        ...prev , [name] : value 
-       }))
-  }
-  
-
-  const sendReport = async (e)=>{
+ const sendReport = async (e) => {
     e.preventDefault();
-     
-    try {
-       const api = `${import.meta.env.VITE_BACKEND_URL}/employee/sendreport`;
-       const response = await axios.post(api , {tid , ...input})
-       toast.success(response.data)
-     
-    } catch (error) {
-       console.log(error)
+    
+    // ✅ Validation
+    if (!input.status) {
+        toast.error("Please select a status");
+        return;
     }
 
-  }
-
+    try {
+        const api = `${import.meta.env.VITE_BACKEND_URL}/employee/sendreport`;
+        const reportData = { 
+            tid, 
+            status: input.status,
+            completionday: input.completionday ? parseInt(input.completionday) : 0,
+            comment: input.comment || "No comments provided"
+        };
+        
+        console.log("Sending report:", reportData);
+        
+        const response = await axios.post(api, reportData);
+        toast.success(response.data);
+        setShowModal(false);
+        fetchTasks(); // Refresh the task list
+        
+        // ✅ Reset form
+        setInput({
+            status: "",
+            completionday: "",
+            comment: ""
+        });
+    } catch (error) {
+        console.log("Error sending report:", error);
+        toast.error("Failed to send report");
+    }
+};
 
   return (
     <div className="task-container">
@@ -71,7 +100,7 @@ const Showtask = () => {
               <th>#</th>
               <th>Task Title</th>
               <th>Description</th>
-              <th>Duration</th>
+              <th>Duration (Days)</th>
               <th>Priority</th>
               <th>Status</th>
               <th>Action</th>
@@ -95,10 +124,10 @@ const Showtask = () => {
                   </td>
                   <td>
                     <span
-                      className={`status-badge ${task.status?.toLowerCase().replace(" ", "-") || "pending"
+                      className={`status-badge ${task.status?.toLowerCase().replace(" ", "-") || "assigned"
                         }`}
                     >
-                      {task.status || "Pending"}
+                      {task.status || "Assigned"}
                     </span>
                   </td>
                   <td>
@@ -127,34 +156,42 @@ const Showtask = () => {
         <div className="modal-overlay">
           <div className="modal-content">
             <h3>Update Status: {selectedTask?.title}</h3>
-            <form className="report-form">
+            <form className="report-form" onSubmit={sendReport}>
               <label>Status</label>
-              <select name="status" required onChange={handlchange} >
+              <select 
+                name="status" 
+                required 
+                onChange={handlchange}
+                value={input.status}
+              >
                 <option value="">Select Status</option>
                 <option value="Not Started">Not Started</option>
                 <option value="In Progress">In Progress</option>
                 <option value="Completed">Completed</option>
+                <option value="On Hold">On Hold</option>
               </select>
 
-              <label>Duration</label>
+              <label>Days Taken</label>
               <input
+                type="number"
                 name="completionday"
-                placeholder=" Enter duration in digit "
-                rows="4"
+                placeholder="Enter days taken to complete"
+                value={input.completionday}
                 onChange={handlchange}
-              ></input>
+                min="0"
+              />
 
               <label>Message / Progress Note</label>
               <textarea
                 name="comment"
                 placeholder="Add progress details or remarks..."
                 rows="4"
+                value={input.comment}
                 onChange={handlchange}
               ></textarea>
 
               <div className="modal-actions">
-                <button type="submit" className="submit-report-btn"  onClick= {sendReport}>
-                 
+                <button type="submit" className="submit-report-btn">
                   Update Task
                 </button>
                 <button

@@ -9,6 +9,8 @@ import AssignTask from "./admin/AssignTask";
 import SeeReport from "./admin/SeeReport";
 import Empdashboard from "./employee/empDashboard";
 import Showtask from "./employee/Showtask";
+import CompletedTask from "./employee/CompletedTask";
+
 function App() {
   return (
     <>
@@ -31,6 +33,7 @@ function App() {
           <Route path="/empdashboard/:id" element={<Empdashboard />}>
             <Route index element={<Showtask />} />
             <Route path="showtask" element={<Showtask />} />
+            <Route path="completedtask" element={<CompletedTask />} />
           </Route>
         </Routes>
       </BrowserRouter>

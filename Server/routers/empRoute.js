@@ -1,9 +1,10 @@
 const express = require("express");
-const router = express.Router();
+const route = express.Router();
 const empCortroller = require("../controllers/empController");
 
-router.post("/login" ,  empCortroller.emptask);
-router.get("/showtask/:id" , empCortroller.showTask);
-router.post("/sendreport" , empCortroller.sendReport);
+route.post("/login" ,  empCortroller.emptask);
+route.get("/showtask/:id" , empCortroller.showTask);
+route.post("/sendreport" , empCortroller.sendReport);
+route.get("/showcompletedtask" , empCortroller.showCompletedTask);
 
-module.exports = router;
+module.exports = route;

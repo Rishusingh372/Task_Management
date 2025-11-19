@@ -4,7 +4,7 @@ const empSchema= new mongoose.Schema({
     name:String,
     email:String,
     designation:String,
-    password:String
+    password:String,
 })
 
 module.exports = mongoose.model("employee", empSchema);

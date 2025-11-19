@@ -1,16 +1,13 @@
 import { useState } from "react";
 import "../css/Home.css";
 import axios from "axios";
-import {useNavigate} from 'react-router-dom';
- import { toast } from 'react-toastify';
-
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Home = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-
-
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -24,43 +21,40 @@ const Home = () => {
     }
   };
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-   if(role === "Admin"){
-    try {
-      const api = `${import.meta.env.VITE_BACKEND_URL}/admin/login`;
-      const response = await axios.post( api, { email, password, });
-      toast.success(response.data.msg);
+    if (role === "Admin") {
+      try {
+        const api = `${import.meta.env.VITE_BACKEND_URL}/admin/login`;
+        const response = await axios.post(api, { email, password });
+        toast.success(response.data.msg);
 
-      localStorage.setItem("admin" , response.data.admin._id);
-      localStorage.setItem("adminemail" , response.data.admin.email);
+        localStorage.setItem("admin", response.data.admin._id);
+        localStorage.setItem("adminemail", response.data.admin.email);
 
-      navigate("/admindashboard");
+        navigate("/admindashboard");
+      } catch (error) {
+        toast.error(error.response?.data?.msg || "Admin login failed");
+      }
+    } else {
+      try {
+        const api = `${import.meta.env.VITE_BACKEND_URL}/employee/login`;
+        const response = await axios.post(api, { email, password });
+        toast.success(response.data.msg);
 
-    } catch (error) {
-      toast.error(error.response.data.msg);
+        const id = response.data.employee._id;
+        const empname = response.data.empname || response.data.employee.name;
+        
+        // Store employee data in localStorage
+        localStorage.setItem("empid", id);
+        localStorage.setItem("empname", empname);
+        localStorage.setItem("empemail", response.data.employee.email);
+
+        navigate(`/empdashboard/${id}`);
+      } catch (error) {
+        toast.error(error.response?.data?.msg || "Employee login failed");
+      }
     }
-   } else {
-  
-     try {
- 
-      const api = `${import.meta.env.VITE_BACKEND_URL}/employee/login`;
-      const response = await axios.post( api, { email, password, });
-      toast.success(response.data.msg);
-  
-       const id = response.data.employee._id
-  
-      navigate(`/empdashboard/${id}`);
-
-      
-     } catch (error) {
-        toast.error(error.response.data.msg);
-     }
-    
-   } 
-  
   }
 
   return (
@@ -92,8 +86,9 @@ const Home = () => {
             name="role"
             value={role}
             onChange={handleChange}
+            required
           >
-               <option value="" disabled>Select Role</option>
+            <option value="" disabled>Select Role</option>
             <option value="Admin">Admin</option>
             <option value="Employee">Employee</option>
           </select>
@@ -104,6 +99,5 @@ const Home = () => {
     </div>
   );
 }
-
 
 export default Home;

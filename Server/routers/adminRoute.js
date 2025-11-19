@@ -1,15 +1,17 @@
 const express = require("express");
-const router = express.Router();
+const route = express.Router();
 const adminCortroller = require("../controllers/adminController");
 
 
-router.post("/login" ,adminCortroller.adminLogin);
-router.post("/createuser" , adminCortroller.createUser);
-router.get("/empdatalist" , adminCortroller.empDataList);
-router.post("/assigntask" ,adminCortroller.assignTask );
-router.get("/seereport" ,adminCortroller.seeReport );
+route.post("/login" ,adminCortroller.adminLogin);
+route.post("/createuser" , adminCortroller.createUser);
+route.get("/empdatalist" , adminCortroller.empDataList);
+route.post("/assigntask" ,adminCortroller.assignTask );
+route.get("/seereport" ,adminCortroller.seeReport );
+route.get("/taskreassign", adminCortroller.taskReassign);
 
 
 
 
-module.exports = router;
+
+module.exports = route;

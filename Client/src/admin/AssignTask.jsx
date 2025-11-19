@@ -1,22 +1,20 @@
-
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "../css/admin/assignTask.css";
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
 
 const AssignTask = () => {
   const [empdata, setEmpdata] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedEmp, setSelectedEmp] = useState(null);
-  const [empid ,setEmpid] = useState("");
+  const [empid, setEmpid] = useState("");
   const [task, setTask] = useState({
     title: "",
     description: "",
     duration: "",
-    priority: "",
+    priority: "Low",
     empid: ""
   });
-
 
   // Fetch employee data
   const fetchData = async () => {
@@ -26,6 +24,7 @@ const AssignTask = () => {
       setEmpdata(response.data);
     } catch (error) {
       console.log("Error fetching employee data", error);
+      toast.error("Failed to load employee data");
     }
   };
 
@@ -33,41 +32,47 @@ const AssignTask = () => {
     fetchData();
   }, []);
 
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  setTask((prev) => ({
-    ...prev,
-    [name]: value,
-  }));
-};
-
-
-
-
-
-
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setTask((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   // Handle opening the modal
   const handleAssignClick = (emp) => {
     setSelectedEmp(emp);
-    setEmpid(emp._id)
+    setEmpid(emp._id);
     setShowModal(true);
   };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-     console.log(task)
+    console.log("Submitting task:", task);
     try {
       const api = `${import.meta.env.VITE_BACKEND_URL}/admin/assigntask`;
-   const finalTask = { ...task, empid: empid };
-    const response =    await axios.post(api, finalTask);
-    console.log(response.data)
-      toast.success(`Task assigned to ${selectedEmp.name}`)
+      const finalTask = { 
+        ...task, 
+        empid: empid,
+        duration: parseInt(task.duration)  // Ensure it's a number
+      };
+      const response = await axios.post(api, finalTask);
+      console.log("Task assignment response:", response.data);
+      toast.success(`Task assigned to ${selectedEmp.name}`);
       setShowModal(false);
+      // Reset form
+      setTask({
+        title: "",
+        description: "",
+        duration: "",
+        priority: "Low",
+        empid: ""
+      });
     } catch (error) {
       console.log("Error assigning task:", error);
-      toast.error("Failed to assign task. Try again.")
+      toast.error("Failed to assign task. Try again.");
     }
   };
 
@@ -91,7 +96,7 @@ const handleChange = (e) => {
           </thead>
           <tbody>
             {empdata.map((emp, index) => (
-              <tr key={index}>
+              <tr key={emp._id}>
                 <td>{index + 1}</td>
                 <td>{emp.name}</td>
                 <td>{emp.email}</td>
@@ -128,7 +133,7 @@ const handleChange = (e) => {
 
               <label>Task Description</label>
               <textarea
-              name="description"
+                name="description"
                 value={task.description}
                 onChange={handleChange}
                 placeholder="Enter task description"
@@ -142,15 +147,16 @@ const handleChange = (e) => {
                 name="duration"
                 value={task.duration}
                 onChange={handleChange}
-                placeholder="Enter duration"
+                placeholder="Enter duration in days"
+                min="1"
                 required
               />
 
               <label>Priority</label>
               <select
-              name="priority"
+                name="priority"
                 value={task.priority}
-                 onChange={handleChange}
+                onChange={handleChange}
               >
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
