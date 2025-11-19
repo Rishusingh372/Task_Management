@@ -49,6 +49,7 @@ const Home = () => {
         localStorage.setItem("empid", id);
         localStorage.setItem("empname", empname);
         localStorage.setItem("empemail", response.data.employee.email);
+        localStorage.setItem("empdesignation", response.data.employee.designation);
 
         navigate(`/empdashboard/${id}`);
       } catch (error) {

@@ -10,6 +10,7 @@ import SeeReport from "./admin/SeeReport";
 import Empdashboard from "./employee/empDashboard";
 import Showtask from "./employee/Showtask";
 import CompletedTask from "./employee/CompletedTask";
+import Profile from "./employee/Profile";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route index element={<Showtask />} />
             <Route path="showtask" element={<Showtask />} />
             <Route path="completedtask" element={<CompletedTask />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -99,9 +99,27 @@ const showCompletedTask = async (req, res) => {
     }
 }
 
+  const getEmployeeProfile = async (req, res) => {
+    const { id } = req.params;
+    
+    try {
+        const employee = await empModel.findById(id);
+        
+        if (!employee) {
+            return res.status(404).send({ msg: "Employee not found" });
+        }
+        
+        res.status(200).send(employee);
+    } catch (error) {
+        console.log("Error in getEmployeeProfile:", error);
+        res.status(500).send({ msg: "Error fetching employee profile", error: error.message });
+    }
+};
+
 module.exports = {
     emptask,
     showTask,
     sendReport,
-    showCompletedTask
+    showCompletedTask,
+    getEmployeeProfile
 }
