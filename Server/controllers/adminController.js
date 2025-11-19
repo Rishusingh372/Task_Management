@@ -134,11 +134,31 @@ const taskReassign = async (req, res) => {
     }
 }
 
+const removeEmployee = async (req, res) => {
+    const { id } = req.params;
+    
+    try {
+        // Find and delete employee
+        const employee = await empModel.findByIdAndDelete(id);
+        if (!employee) {
+            return res.status(404).send({ msg: "Employee not found" });
+        }
+        // Also delete all tasks assigned to this employee
+        await emptaskModel.deleteMany({ empid: id });
+
+        res.status(200).send({ msg: "Employee removed successfully" });
+    } catch (error) {
+        console.log("Error in removeEmployee:", error);
+        res.status(500).send({ msg: "Error removing employee", error: error.message });
+    }
+};
+
 module.exports = {
     adminLogin,
     createUser,
     empDataList,
     assignTask,
     seeReport,
-    taskReassign
+    taskReassign,
+    removeEmployee
 };

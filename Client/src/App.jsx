@@ -11,6 +11,7 @@ import Empdashboard from "./employee/empDashboard";
 import Showtask from "./employee/Showtask";
 import CompletedTask from "./employee/CompletedTask";
 import Profile from "./employee/Profile";
+import ViewUsers from "./admin/ViewUsers";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="createUser" element={<CreateUser />} />
             <Route path="assignTask" element={<AssignTask />} />
             <Route path="see-report" element={<SeeReport />} />
+            <Route path="viewUsers" element={<ViewUsers />} />
           </Route>
         </Routes>
 
