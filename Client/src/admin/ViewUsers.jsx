@@ -17,6 +17,7 @@ const ViewUsers = () => {
             console.log("Error fetching employees:", error);
             toast.error("Failed to load employees");
             setLoading(false);
+            
         }
     };
 
