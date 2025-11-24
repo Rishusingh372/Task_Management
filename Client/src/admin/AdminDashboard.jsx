@@ -11,7 +11,7 @@ const AdminDashboard = () => {
       {/* Sidebar */}
       <aside className={`sidebar ${isOpen ? "open" : "closed"}`}>
         <div className="sidebar-header">
-          <h2 className="logo">{isOpen ? "Task Manager" : "TM"}</h2>
+          <h2 className="logo">{isOpen ? "TaskFlow Admin" : "TM"}</h2>
           <button className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -22,7 +22,8 @@ const AdminDashboard = () => {
           <Link to="assignTask">Assign Task</Link>
           <Link to="see-report">View Reports</Link> 
           <Link to="viewUsers">View Users</Link>
-          <Link to="updateTaskStatus">Update Task Status</Link>
+          <Link to="contacts">All Contact Leads</Link>
+
         </nav>
       </aside>
 

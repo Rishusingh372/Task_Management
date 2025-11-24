@@ -13,6 +13,7 @@ import CompletedTask from "./employee/CompletedTask";
 import Profile from "./employee/Profile";
 import ViewUsers from "./admin/ViewUsers";
 import LandingPage from "./pages/LandingPage"; 
+import Contacts from "./admin/Contacts";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="assignTask" element={<AssignTask />} />
             <Route path="see-report" element={<SeeReport />} />
             <Route path="viewUsers" element={<ViewUsers />} />
+            <Route path="contacts" element={<Contacts />} />
           </Route>
         </Routes>
 

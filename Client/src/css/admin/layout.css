@@ -198,7 +198,7 @@
 }
 
 /* Animations */
-@keyframes fadeIn {
+/* @keyframes fadeIn {
   from {
     opacity: 0;
   }
@@ -214,7 +214,7 @@
   to {
     transform: translateX(0);
   }
-}
+} */
 
 /* Responsive */
 @media (max-width: 768px) {
