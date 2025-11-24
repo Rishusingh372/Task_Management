@@ -1,4 +1,4 @@
-import {BrowserRouter as Router,Routes, Route, BrowserRouter,} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
@@ -12,14 +12,17 @@ import Showtask from "./employee/Showtask";
 import CompletedTask from "./employee/CompletedTask";
 import Profile from "./employee/Profile";
 import ViewUsers from "./admin/ViewUsers";
+import LandingPage from "./pages/LandingPage"; 
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          {/* Landing Page as default route */}
           <Route path="/" element={<Layout />}>
-            <Route index element={<Login />} />
+            <Route index element={<LandingPage />} /> 
+            <Route path="login" element={<Login />} /> 
           </Route>
         </Routes>
 

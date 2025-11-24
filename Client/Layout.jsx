@@ -1,14 +1,15 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import Hearder from './src/components/Header'
+import Header from './src/components/Header'
 import Footer from './src/components/Footer'
+
 const Layout = () => {
   return (
     <>
-        <Hearder />
-        <div>
+        <Header />
+        <main>
             <Outlet />
-        </div>
+        </main>
         <Footer />
     </>
   )

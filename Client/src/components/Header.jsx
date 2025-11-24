@@ -1,9 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import "../css/Header.css"; // We'll create this CSS file
+import { useNavigate, useLocation } from 'react-router-dom';
+import '../css/Header.css';
 
 const Header = () => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleLoginClick = () => {
         navigate('/login');
@@ -12,6 +13,11 @@ const Header = () => {
     const handleLogoClick = () => {
         navigate('/');
     };
+
+    // Don't show header on login page
+    if (location.pathname === '/login') {
+        return null;
+    }
 
     return (
         <header className="header">
@@ -27,16 +33,18 @@ const Header = () => {
                     </div>
                 </div>
 
-                {/* Login Button */}
-                <div className="header-actions">
-                    <button 
-                        className="login-btn"
-                        onClick={handleLoginClick}
-                    >
-                        <i className="fas fa-sign-in-alt"></i>
-                        <span>Login</span>
-                    </button>
-                </div>
+                {/* Login Button - Only show if not on login page */}
+                {location.pathname !== '/login' && (
+                    <div className="header-actions">
+                        <button 
+                            className="login-btn"
+                            onClick={handleLoginClick}
+                        >
+                            <i className="fas fa-sign-in-alt"></i>
+                            <span>Login</span>
+                        </button>
+                    </div>
+                )}
             </div>
         </header>
     );
