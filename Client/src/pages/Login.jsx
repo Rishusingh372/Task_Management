@@ -1,10 +1,10 @@
 import { useState } from "react";
-import "../css/Home.css";
+import "../css/Login.css";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const Home = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
@@ -101,4 +101,4 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default Login;

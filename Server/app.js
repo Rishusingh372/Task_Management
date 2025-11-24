@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const adminRouter = require("./routers/adminRoute");
 const empRouter = require("./routers/empRoute");
+const contactRouter = require("./routers/contactRoute");
 
 
 const mongoose = require("mongoose");
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/admin", adminRouter);
 app.use("/employee" , empRouter);
+app.use("/api", contactRouter);
 
 
 mongoose.connect(process.env.MONGODB_URL).then(()=>{
