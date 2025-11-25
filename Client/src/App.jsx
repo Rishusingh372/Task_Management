@@ -14,6 +14,7 @@ import Profile from "./employee/Profile";
 import ViewUsers from "./admin/ViewUsers";
 import LandingPage from "./pages/LandingPage"; 
 import Contacts from "./admin/Contacts";
+import AdminProfile from "./admin/AdminProfile";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="see-report" element={<SeeReport />} />
             <Route path="viewUsers" element={<ViewUsers />} />
             <Route path="contacts" element={<Contacts />} />
+            <Route path="adminProfile" element={<AdminProfile />} />
           </Route>
         </Routes>
 

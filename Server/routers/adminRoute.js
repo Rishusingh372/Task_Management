@@ -9,6 +9,7 @@ route.get("/empdatalist" , adminCortroller.empDataList);
 route.post("/assigntask" ,adminCortroller.assignTask );
 route.get("/seereport" ,adminCortroller.seeReport );
 route.get("/taskreassign", adminCortroller.taskReassign);
+route.get("/profile", adminCortroller.getAdminProfile);
 route.delete("/removeemployee/:id", adminCortroller.removeEmployee);
 
 

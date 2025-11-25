@@ -238,7 +238,7 @@
 }
 
 /* Additional floating animation for sidebar */
-.sidebar::after {
+/* .sidebar::after {
   content: '';
   position: absolute;
   top: 0;
@@ -253,4 +253,4 @@
 @keyframes sidebarShine {
   0%, 100% { transform: translateX(-100%); }
   50% { transform: translateX(100%); }
-}
+} */

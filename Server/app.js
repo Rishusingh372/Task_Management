@@ -5,8 +5,6 @@ const bodyParser = require("body-parser");
 const adminRouter = require("./routers/adminRoute");
 const empRouter = require("./routers/empRoute");
 const contactRouter = require("./routers/contactRoute");
-
-
 const mongoose = require("mongoose");
 require("dotenv").config();
 

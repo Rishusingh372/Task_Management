@@ -153,6 +153,22 @@ const removeEmployee = async (req, res) => {
     }
 };
 
+const getAdminProfile = async (req, res) => {
+    try {
+        // For demo, get first admin or use authenticated admin ID
+        const admin = await adminModel.findOne();
+        
+        if (!admin) {
+            return res.status(404).send({ msg: "Admin not found" });
+        }
+        
+        res.status(200).send(admin);
+    } catch (error) {
+        console.log("Error in getAdminProfile:", error);
+        res.status(500).send({ msg: "Error fetching admin profile", error: error.message });
+    }
+};
+
 module.exports = {
     adminLogin,
     createUser,
@@ -160,5 +176,6 @@ module.exports = {
     assignTask,
     seeReport,
     taskReassign,
-    removeEmployee
+    removeEmployee,
+    getAdminProfile
 };

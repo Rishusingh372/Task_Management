@@ -23,6 +23,7 @@ const AdminDashboard = () => {
           <Link to="see-report">View Reports</Link> 
           <Link to="viewUsers">View Users</Link>
           <Link to="contacts">All Contact Leads</Link>
+          <Link to="adminProfile">Admin Profile</Link>
 
         </nav>
       </aside>
