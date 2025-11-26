@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import "../css/employee/showTask.css";
+import "../css/employee/showtask.css";
 import { toast } from "react-toastify";
 
 const Showtask = () => {
