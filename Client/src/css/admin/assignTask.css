@@ -137,11 +137,12 @@
   color: #334155;
   gap: 0;
 }
-.task-form{
+
+/* .task-form{
   display: flex;
   flex-direction: column;
   gap: 0px;
-}
+} */
 
 .task-form input,
 .task-form textarea,
@@ -157,6 +158,11 @@
   gap: 0;
 }
 
+.task-form{
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
 .task-form input:focus,
 .task-form textarea:focus,
 .task-form select:focus {
